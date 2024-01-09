@@ -1,0 +1,25 @@
+{
+  "ignition": {
+    "version": "3.3.0"
+  },
+  "passwd": {
+    "users": [
+      {
+        "name": "core",
+        "sshAuthorizedKeys": [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDecqwPTmECiHmfUt3g18Hr13dJ7Lr3ug48cDhxbPjxa user01@bastion"
+        ]
+      }
+    ]
+  },
+  "systemd": {
+    "units": [
+      {
+        "contents": "[Unit]\nDescription=A hello world unit!\nAfter=network-online.target\nWants=network-online.target\n[Service]\nType=forking\nKillMode=none\nRestart=on-failure\nRemainAfterExit=yes\nExecStartPre=podman pull quay.io/gbsalinetti/hello-server\nExecStart=podman run -d --name hello-server -p 8080:8080 quay.io/gbsalinetti/hello-server\nExecStop=podman stop -t 10 hello-server\nExecStopPost=podman rm hello-server\n[Install]\nWantedBy=multi-user.target",
+        "enabled": true,
+        "name": "hello.service"
+      }
+    ]
+  }
+}
+

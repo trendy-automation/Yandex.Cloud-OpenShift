@@ -1,17 +1,22 @@
 terraform {
-    required_version = ">= 0.12.24"
+  required_providers {
+    yandex = {
+      source = "yandex-cloud/yandex"
+    }
+  }
+  required_version = ">= 0.13"
 }
 
-provider "yandex" {
-  version = "~> 0.40"
-  token     = var.yc_oauth_token
-  cloud_id  = var.yc_cloud_id
-  folder_id = var.yc_folder_id
-#  endpoint  = "api.cloud-preprod.yandex.net:443"
-}
+#provider "yandex" {
+#  version = "~> 0.40"
+#  token     = var.yc_oauth_token
+#  cloud_id  = var.yc_cloud_id
+#  folder_id = var.yc_folder_id
+##  endpoint  = "api.cloud-preprod.yandex.net:443"
+#}
 
 resource "yandex_vpc_network" "vpc" {
-  name           = "openshift-vpc" 
+  name           = "okd-vpc" 
 }
 
 resource "yandex_vpc_subnet" "subnet" {

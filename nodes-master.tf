@@ -2,19 +2,19 @@
  resource  "yandex_compute_disk" "master_docker_storage_disk" {
          count       = var.okd_kube_master_num
          name = "k8s-master-${count.index}-docker-storage-disk"
-         size = 128
+         size = var.okd_kube_master_disk
          type = "network-ssd"
-         zone = element(var.okd_availability_zones, count.index)
+         zone = element(var.okd_availability_zones, 0)
 }
 
 resource "yandex_compute_instance" "master" {
 
     count       = var.okd_kube_master_num
-    platform_id = "standard-v2" // Intel Cascade Lake
+    platform_id = "standard-v3"
     name        = "k8s-master-${count.index}"
     hostname    = "k8s-master-${count.index}"
     description = "k8s-master-${count.index} of the ${var.okd_project_name} ${var.okd_cluster_name} cluster"
-    zone = element(var.okd_availability_zones, count.index)
+    zone = element(var.okd_availability_zones, 0)
 
     resources {
       cores  = var.okd_kube_master_cpu
@@ -41,8 +41,8 @@ resource "yandex_compute_instance" "master" {
   }
 
     network_interface {
-      subnet_id = element(yandex_vpc_subnet.subnet, count.index).id
-      nat       = false
+        subnet_id = element(yandex_vpc_subnet.subnet, count.index).id
+        nat       = false
     }
 
     metadata = {

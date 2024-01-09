@@ -2,20 +2,20 @@
  resource  "yandex_compute_disk" "worker_docker_storage_disk" {
          count       = var.okd_kube_master_num
          name = "k8s-worker-${count.index}-docker-storage-disk"
-         size = 128
+         size = var.okd_kube_worker_disk
          type = "network-ssd"
-         zone = element(var.okd_availability_zones, count.index)
+         zone = element(var.okd_availability_zones, 0)
 }
 
 
 resource "yandex_compute_instance" "worker" {
 
     count = var.okd_kube_worker_num
-    platform_id = "standard-v2" // Intel Cascade Lake
+    platform_id = "standard-v3"
     name        = "k8s-worker-${count.index}"
     hostname    = "k8s-worker-${count.index}"
     description = "k8s-worker-${count.index} of the ${var.okd_project_name} ${var.okd_cluster_name} cluster"
-    zone = element(var.okd_availability_zones, count.index)
+    zone = element(var.okd_availability_zones, 0)
 
 
     resources {

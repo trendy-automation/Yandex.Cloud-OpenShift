@@ -6,7 +6,7 @@ public_key_path ="<your_ssh_public_key_file_path>"
 
 okd_project_name = "openshift"
 okd_cluster_name = "okd-dev-test"
-okd_image_family = "centos-7"
+okd_image_family = "fedora-coreos-35"
 
 #VPC Vars
 okd_cidr_subnets = ["10.250.192.0/24","10.250.193.0/24","10.250.194.0/24"]

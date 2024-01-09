@@ -53,6 +53,13 @@ variable "okd_bastion_cpu" {
 variable "okd_bastion_ram" {
     description = "Node RAM size"
 }
+variable "okd_bastion_ip" {
+    description = "Bastion IP"
+}
+variable "okd_bastion_ram_disk" {
+    description = "Bastion disk size"
+}
+
 
 /*
 * The number should be divisable by the number of used
@@ -67,6 +74,13 @@ variable "okd_kube_master_cpu" {
 variable "okd_kube_master_ram" {
     description = "Node RAM size"
 }
+variable "okd_kube_master_ips" {
+    description = "Master IPs"
+}
+variable "okd_kube_master_disk" {
+    description = "Master disk size"
+}
+
 
 variable "okd_kube_infra_num" {
     description = "Number of Kubernetes Infrastructure Nodes"
@@ -77,6 +91,12 @@ variable "okd_kube_infra_cpu" {
 variable "okd_kube_infra_ram" {
     description = "Node RAM size"
 }
+variable "okd_kube_infra_ips" {
+    description = "Infra IPs"
+}
+variable "okd_kube_infra_disk" {
+    description = "Infra disk size"
+}
 
 variable "okd_kube_worker_num" {
     description = "Number of Kubernetes Master Nodes"
@@ -86,6 +106,12 @@ variable "okd_kube_worker_cpu" {
 }
 variable "okd_kube_worker_ram" {
     description = "Node RAM size"
+}
+variable "okd_kube_worker_ips" {
+    description = "Worker IPs"
+}
+variable "okd_kube_worker_disk" {
+    description = "Worker disk size"
 }
 
 variable "okd_availability_zones" {
